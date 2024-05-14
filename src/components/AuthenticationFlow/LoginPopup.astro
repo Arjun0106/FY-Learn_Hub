@@ -1,0 +1,20 @@
+---
+import Popup from '../Popup/Popup.astro';
+import { AuthenticationForm } from './AuthenticationForm';
+---
+
+<Popup id='login-popup' title='' subtitle=''>
+  <div class='mb-7 text-center'>
+    <p class='mb-3 text-2xl font-semibold leading-5 text-slate-900'>
+      Login to your account
+    </p>
+    <p class='mt-2 text-sm leading-4 text-slate-600'>
+      You must be logged in to perform this action.
+    </p>
+  </div>
+  <AuthenticationForm client:load />
+  <div class='mt-6 text-center text-sm text-slate-600'>
+    Don't have an account?{' '}
+    <a href='/signup' class='font-medium text-[#4285f4]'> Sign up</a>
+  </div>
+</Popup>

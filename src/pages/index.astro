@@ -1,0 +1,95 @@
+---
+import FeaturedVideos from '../components/FeaturedVideos.astro';
+import FeaturedGuides from '../components/FeaturedGuides.astro';
+import FeaturedItems from '../components/FeaturedItems/FeaturedItems.astro';
+import HeroSection from '../components/HeroSection/HeroSection.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllBestPractices } from '../lib/best-pratice';
+import { getAllGuides } from '../lib/guide';
+import { getRoadmapsByTag } from '../lib/roadmap';
+import { getAllVideos } from '../lib/video';
+import { getAllQuestionGroups } from '../lib/question-group';
+
+const roleRoadmaps = await getRoadmapsByTag('role-roadmap');
+const skillRoadmaps = await getRoadmapsByTag('skill-roadmap');
+const bestPractices = await getAllBestPractices();
+const questionGroups = await getAllQuestionGroups();
+
+const guides = await getAllGuides();
+const videos = await getAllVideos();
+---
+
+<BaseLayout
+  title='Learn Hub'
+  description={'A Gateway with articles and guides for developers to grow in their career.'}
+  permalink={'/'}
+>
+<style>
+  .custom-gradient {
+    background: linear-gradient(to bottom, #66fcf1, #66fcf1, #66fcf1);
+  }
+</style>
+  <div class='bg-gradient-to-b from-white to-slate-300'>
+    <HeroSection />
+  </div>
+  <div class="bg-gradient-to-b custom-gradient">
+    <!--
+    <FeaturedItems
+      heading='Role-based Learning'
+      featuredItems={roleRoadmaps
+        .filter((roadmapItem) => !roadmapItem.frontmatter.isHidden)
+        .slice(5, 17)
+        .map((roadmapItem) => ({
+          text: roadmapItem.frontmatter.briefTitle,
+          url: `/${roadmapItem.id}`,
+          isNew: roadmapItem.frontmatter.isNew,
+          isUpcoming: roadmapItem.frontmatter.isUpcoming,
+        }))}
+      showCreateRoadmap={false}
+    />
+    -->
+    <FeaturedItems
+      heading='Here are some to grab'
+      allowBookmark={false}
+      featuredItems={skillRoadmaps
+        .filter((roadmapItem) => !roadmapItem.frontmatter.isHidden)
+        .slice(0, 12)
+        .map((roadmapItem) => ({
+          text:
+            roadmapItem.frontmatter.briefTitle === 'Go'
+              ? 'Go Roadmap'
+              : roadmapItem.frontmatter.briefTitle,
+          url: `/${roadmapItem.id}`,
+          
+          isUpcoming: roadmapItem.frontmatter.isUpcoming,
+        }))}
+      showCreateRoadmap={false}
+    />
+<!--
+    <FeaturedItems
+      heading='Best Practices'
+      featuredItems={bestPractices.map((bestPractice) => ({
+        text: bestPractice.frontmatter.briefTitle,
+        url: `/best-practices/${bestPractice.id}`,
+        isNew: bestPractice.frontmatter.isNew,
+        isUpcoming: bestPractice.frontmatter.isUpcoming,
+      }))}
+    />
+
+    <FeaturedItems
+      heading='Questions'
+      allowBookmark={false}
+      featuredItems={questionGroups.map((questionGroup) => ({
+        text: questionGroup.frontmatter.briefTitle,
+        url: `/questions/${questionGroup.id}`,
+        isNew: questionGroup.frontmatter.isNew,
+      }))}
+    />
+  </div>
+
+    <div class='grid grid-cols-1 gap-7 bg-gradient-to-b from-slate-200 via-white to-slate-200 text-slate-900 py-7 sm:gap-16 sm:py-16'>
+      <FeaturedGuides heading='Guides' guides={guides.slice(0, 10)} />
+      <FeaturedVideos heading='Videos' videos={videos.slice(0, 10)} />
+    </div>
+  -->
+</BaseLayout>
