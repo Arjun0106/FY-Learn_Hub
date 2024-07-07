@@ -2,7 +2,7 @@
 
 - Learn Hub is a web application that helps to learn any technology in a structured & organized way.
 - The idea is to enhance Internet learning by producing search query results based on higher accuracy and relevance of the content, instead of traditional ranking methods.
-- It has been developed using Python, Astro, and React. (CSE Final Year Project 2024).
+- CSE Final Year Project 2024.
 
 # Tech Stack
 
